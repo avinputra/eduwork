@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Portofolio Saya - Bootstrap</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
+            padding: 80px 0;
+        }
+
+        .profile-avatar {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
+        }
+
+        /* Efek Hover Kustom & Transisi Halus */
+        .card-custom {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.35s ease-in-out;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 35px -5px rgba(79, 70, 229, 0.2);
+        }
+
+        /* Efek Hover untuk Tombol Utama */
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+        }
+
+        .btn-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+        }
+
+        /* Styling Carousel */
+        .carousel-item img {
+            border-radius: 20px;
+            object-fit: cover;
+            max-height: 450px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .carousel-indicators [data-bs-target] {
+            background-color: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: NAVBAR (RESPONSIF BOOTSTRAP) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary fs-4" href="#">MyPortfolio.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-3">
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="#header">Header</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="#carousel-section">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="#biodata">Biodata</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="#portofolio">Portofolio</a></li>
+                    <li class="nav-item">
+                        <!-- Tombol Pemicu Modal -->
+                        <button type="button" class="btn btn-primary rounded-pill px-4 fw-semibold shadow-sm btn-hover-effect" data-bs-toggle="modal" data-bs-target="#contactModal">
+                            Hubungi Saya
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 2: HEADER / HERO -->
+    <header class="hero-section" id="header">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-3">Welcome to my site</span>
+                    <h1 class="display-4 fw-bold text-dark mb-3">Halo, Saya Seorang Web Developer Profesional</h1>
+                    <p class="lead text-muted mb-4">
+                        Ini adalah tampilan portofolio modern yang dibangun menggunakan Bootstrap 5, dilengkapi carousel ilustrasi, efek interaktif, serta desain responsif penuh.
+                    </p>
+                    <div class="d-flex justify-content-center justify-content-lg-start gap-3">
+                        <a href="#portofolio" class="btn btn-primary btn-lg rounded-pill px-4 shadow btn-hover-effect">Lihat Portofolio</a>
+                        <button type="button" class="btn btn-outline-dark btn-lg rounded-pill px-4 btn-hover-effect" data-bs-toggle="modal" data-bs-target="#contactModal">Pesan Cepat</button>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <!-- Ilustrasi Vektor Manusia / Profil Profesional (SVG) -->
+                    <svg class="profile-avatar" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradAvatar" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.2"/>
+                                <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.3"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="250" cy="250" r="210" fill="url(#gradAvatar)"/>
+                        <path d="M150 420 C150 340 190 320 250 320 C310 320 350 340 350 420 Z" fill="#312e81"/>
+                        <path d="M210 320 L250 370 L290 320 Z" fill="#ffffff"/>
+                        <polygon points="230,320 250,350 270,320" fill="#4f46e5"/>
+                        <rect x="225" y="270" width="50" height="60" fill="#fcd34d" rx="10"/>
+                        <circle cx="250" cy="190" r="75" fill="#f59e0b"/>
+                        <path d="M175 190 C175 120 210 100 250 100 C290 100 325 120 325 190 C325 190 310 140 250 140 C190 140 175 190 175 190 Z" fill="#1e1b4b"/>
+                        <rect x="200" y="170" width="45" height="30" rx="6" fill="none" stroke="#1e1b4b" stroke-width="6"/>
+                        <rect x="255" y="170" width="45" height="30" rx="6" fill="none" stroke="#1e1b4b" stroke-width="6"/>
+                        <line x1="245" y1="185" x2="255" y2="185" stroke="#1e1b4b" stroke-width="6"/>
+                        <path d="M230,225 Q250,240 270,225" fill="none" stroke="#b45309" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 3: CAROUSEL DENGAN GAMBAR ILUSTRASI -->
+    <section class="py-5 bg-white" id="carousel-section">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark">Galeri &amp; Aktivitas</h2>
+                <p class="text-muted">Ilustrasi suasana kerja dan teknologi yang digunakan</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div id="portfolioCarousel" class="carousel slide shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://placehold.co/800x450/4f46e5/ffffff?text=Modern+Web+Development" class="d-block w-100" alt="Ilustrasi Web Dev">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
+                                    <h5>Pengembangan Web Modern</h5>
+                                    <p class="small">Membangun aplikasi web interaktif dan responsif.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://placehold.co/800x450/0891b2/ffffff?text=UI+UX+Design+Process" class="d-block w-100" alt="Ilustrasi UI UX">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
+                                    <h5>Desain UI/UX Kreatif</h5>
+                                    <p class="small">Fokus pada kenyamanan pengguna dan estetika visual.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://placehold.co/800x450/7c3aed/ffffff?text=Database+&amp;+System+Architecture" class="d-block w-100" alt="Ilustrasi Database">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-2">
+                                    <h5>Arsitektur Sistem &amp; Database</h5>
+                                    <p class="small">Pengelolaan data yang aman, cepat, dan terstruktur.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: BIODATA (GRID BOOTSTRAP) -->
+    <section class="py-5" id="biodata">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark">About Me</h2>
+                <p class="text-muted">A brief introduction about myself</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-custom p-4 text-center h-100 border-top border-primary border-4">
+                        <div class="fs-1 mb-2">👤</div>
+                        <h4 class="h5 fw-bold text-primary">Full Name</h4>
+                        <p class="text-muted mb-0">Avin Kusuma Putra</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-4 text-center h-100 border-top border-info border-4">
+                        <div class="fs-1 mb-2">🎓</div>
+                        <h4 class="h5 fw-bold text-info">Education</h4>
+                        <p class="text-muted mb-0">Master of IT</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-4 text-center h-100 border-top border-primary border-4">
+                        <div class="fs-1 mb-2">💼</div>
+                        <h4 class="h5 fw-bold text-primary">Pekerjaan</h4>
+                        <p class="text-muted mb-0">Dosen IT &amp; Web Developer</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-4 text-center h-100 border-top border-info border-4">
+                        <div class="fs-1 mb-2">📧</div>
+                        <h4 class="h5 fw-bold text-info">Contact</h4>
+                        <p class="text-muted mb-0">avin.putra12@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-4 text-center h-100 border-top border-primary border-4">
+                        <div class="fs-1 mb-2">🎨</div>
+                        <h4 class="h5 fw-bold text-primary">Hobi</h4>
+                        <p class="text-muted mb-0">Coding &amp; Teknologi</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-4 text-center h-100 border-top border-info border-4">
+                        <div class="fs-1 mb-2">📍</div>
+                        <h4 class="h5 fw-bold text-info">Alamat</h4>
+                        <p class="text-muted mb-0">Nganjuk, Jawa Timur</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: PORTOFOLIO (BOOTSTRAP GRID) -->
+    <section class="py-5 bg-light" id="portofolio">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark">Portofolio</h2>
+                <p class="text-muted">Beberapa proyek pilihan yang pernah dikerjakan</p>
+            </div>
+            <div class="row g-4">
+                <!-- PROJECT 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-custom h-100 overflow-hidden">
+                        <svg class="card-img-top" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="220" fill="#4f46e5"/>
+                            <rect x="40" y="45" width="320" height="140" rx="12" fill="#ffffff"/>
+                            <rect x="65" y="70" width="120" height="14" rx="7" fill="#4f46e5"/>
+                        </svg>
+                        <div class="card-body p-4">
+                            <span class="badge bg-primary bg-opacity-10 text-primary mb-2">Web Design</span>
+                            <h4 class="h5 fw-bold">Proyek 1</h4>
+                            <p class="text-muted small mb-0">Deskripsi proyek 1 mengenai pembuatan antarmuka website modern.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- PROJECT 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-custom h-100 overflow-hidden">
+                        <svg class="card-img-top" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="220" fill="#0891b2"/>
+                            <rect x="50" y="35" width="300" height="150" rx="12" fill="#ffffff"/>
+                            <rect x="75" y="65" width="70" height="90" rx="8" fill="#cffafe"/>
+                        </svg>
+                        <div class="card-body p-4">
+                            <span class="badge bg-info bg-opacity-10 text-info mb-2">Mobile App</span>
+                            <h4 class="h5 fw-bold">Proyek 2</h4>
+                            <p class="text-muted small mb-0">Deskripsi proyek 2 mengenai pengembangan aplikasi lintas platform.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- PROJECT 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-custom h-100 overflow-hidden">
+                        <svg class="card-img-top" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="220" fill="#7c3aed"/>
+                            <rect x="45" y="40" width="310" height="140" rx="12" fill="#ffffff"/>
+                            <path d="M75 150 L135 100 L195 125 L265 70" fill="none" stroke="#7c3aed" stroke-width="6"/>
+                        </svg>
+                        <div class="card-body p-4">
+                            <span class="badge bg-primary bg-opacity-10 text-primary mb-2">Dashboard</span>
+                            <h4 class="h5 fw-bold">Proyek 3</h4>
+                            <p class="text-muted small mb-0">Deskripsi proyek 3 mengenai sistem analitik data berbasis web.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- PROJECT 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-custom h-100 overflow-hidden">
+                        <svg class="card-img-top" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="220" fill="#0f766e"/>
+                            <rect x="45" y="40" width="310" height="140" rx="12" fill="#ffffff"/>
+                            <rect x="70" y="65" width="110" height="90" rx="8" fill="#ccfbf1"/>
+                        </svg>
+                        <div class="card-body p-4">
+                            <span class="badge bg-info bg-opacity-10 text-info mb-2">E-Commerce</span>
+                            <h4 class="h5 fw-bold">Proyek 4</h4>
+                            <p class="text-muted small mb-0">Deskripsi proyek 4 mengenai platform toko online lengkap.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0 text-white-50">&copy; 2026 Website Portofolio Saya. Dibangun dengan Bootstrap 5.</p>
+        </div>
+    </footer>
+
+    <!-- BOOTSTRAP MODAL (POP-UP) -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-primary text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold" id="contactModalLabel">Formulir Hubungi Saya</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nama" class="form-label fw-semibold">Nama Lengkap</label>
+                            <input type="text" class="form-control rounded-3" id="nama" placeholder="Masukkan nama Anda">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Alamat Email</label>
+                            <input type="email" class="form-control rounded-3" id="email" placeholder="nama@domain.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pesan" class="form-label fw-semibold">Pesan</label>
+                            <textarea class="form-control rounded-3" id="pesan" rows="3" placeholder="Tuliskan pesan atau keperluan Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm btn-hover-effect">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
