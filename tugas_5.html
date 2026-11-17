@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Produk - Input & Tabel Div dengan Filter</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Styling Tabel Div ala Card Grid */
+        .div-table {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .div-table-header {
+            display: grid;
+            grid-template-columns: 80px 1.5fr 1fr 2fr 1fr 1fr;
+            background: #4f46e5;
+            color: white;
+            font-weight: 600;
+            padding: 14px 20px;
+            border-radius: 12px;
+            text-align: left;
+            align-items: center;
+        }
+
+        .div-table-row {
+            display: grid;
+            grid-template-columns: 80px 1.5fr 1fr 2fr 1fr 1fr;
+            background: #ffffff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            align-items: center;
+            transition: all 0.25s ease-in-out;
+        }
+
+        /* Efek Hover */
+        .div-table-row:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.15);
+            background-color: #eef2ff;
+        }
+
+        .product-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Responsif untuk layar kecil / mobile */
+        @media screen and (max-width: 992px) {
+            .div-table-header {
+                display: none; /* Sembunyikan header tabel di mobile */
+            }
+            .div-table-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 20px;
+                border-left: 5px solid #4f46e5;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container py-5">
+        <!-- Header Judul -->
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-dark">Daftar Produk Toko</h2>
+            <p class="text-muted">Kelola dan filter data produk berdasarkan kategori pilihan Anda</p>
+        </div>
+
+        <!-- Tombol Filter Kategori -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="filter-container">
+            <button class="btn btn-primary btn-sm rounded-pill px-4 active-filter" onclick="filterProduk('Semua', this)">Semua Kategori</button>
+            <button class="btn btn-outline-primary btn-sm rounded-pill px-4" onclick="filterProduk('Pakaian Pria', this)">Pakaian Pria</button>
+            <button class="btn btn-outline-primary btn-sm rounded-pill px-4" onclick="filterProduk('Pakaian Wanita', this)">Pakaian Wanita</button>
+            <button class="btn btn-outline-primary btn-sm rounded-pill px-4" onclick="filterProduk('Barang Elektronik', this)">Barang Elektronik</button>
+            <button class="btn btn-outline-primary btn-sm rounded-pill px-4" onclick="filterProduk('Lainnya', this)">Lainnya</button>
+        </div>
+
+        <!-- Tabel Div Utama -->
+        <div class="div-table shadow-sm">
+            <!-- Header Tabel Div -->
+            <div class="div-table-header">
+                <div>ID</div>
+                <div>Nama Produk</div>
+                <div>Harga</div>
+                <div>Deskripsi</div>
+                <div>Gambar</div>
+                <div>Kategori</div>
+            </div>
+
+            <!-- Konten Baris Data (Akan diisi otomatis oleh JavaScript) -->
+            <div id="div-table-body" class="div-table">
+                <!-- Baris data produk dimasukkan di sini -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script>
+        var i = 0;
+        let daftarProduk = {
+            id_produk: [],
+            nama: [],
+            harga: [],
+            deskripsi: [],
+            gambar: [],
+            kategori: []
+        };
+
+        let lanjut = true; 
+
+        // Proses Input Data menggunakan Prompt berulang
+        do {
+            let id = "P" + String(i + 1).padStart(3, '0'); // Format ID misal P001, P002
+            let nama = prompt('Masukkan nama produk:') || '';
+            let harga = prompt('Masukkan harga produk:') || '0';
+            let deskripsi = prompt('Masukkan deskripsi produk:') || '';
+            let gambar = prompt('Masukkan link url gambar produk \nContoh: https://placehold.co/100') || 'https://placehold.co/100';
+            let kategoriInput = prompt('Masukkan kategori produk \nKode: \n1. Pakaian Pria \n2. Pakaian Wanita \n3. Barang Elektronik') || '1';
+
+            // Ubah kode kategori angka menjadi teks yang readable
+            let namaKategori = "Lainnya";
+            if (kategoriInput === '1') namaKategori = "Pakaian Pria";
+            else if (kategoriInput === '2') namaKategori = "Pakaian Wanita";
+            else if (kategoriInput === '3') namaKategori = "Barang Elektronik";
+
+            // Masukkan data ke dalam struktur objek array
+            daftarProduk['id_produk'][i] = id;
+            daftarProduk['nama'][i] = nama;
+            daftarProduk['harga'][i] = Number(harga); // Simpan sebagai angka asli untuk kemudahan jika nanti diperlukan
+            daftarProduk['deskripsi'][i] = deskripsi;
+            daftarProduk['gambar'][i] = gambar;
+            daftarProduk['kategori'][i] = namaKategori;
+
+            let jawaban = prompt("Apakah Anda ingin selesai menginput? Ketik 'y' jika ya, atau tekan Enter/ketik lain untuk lanjut:");
+            
+            if (jawaban && jawaban.toLowerCase() === 'y') {
+                lanjut = false; 
+            }
+
+            i++;
+        } while (lanjut);
+
+
+        // Fungsi untuk merender/menampilkan data ke HTML berdasarkan kategori yang dipilih
+        function renderTabel(kategoriFilter = 'Semua') {
+            let htmlRows = '';
+            let adaData = false;
+
+            for (var j = 0; j < i; j++) {
+                let katVal = daftarProduk['kategori'][j] || 'Lainnya';
+
+                // Jika filter bukan 'Semua' dan tidak cocok dengan kategori produk, lewati
+                if (kategoriFilter !== 'Semua' && katVal !== kategoriFilter) {
+                    continue;
+                }
+
+                adaData = true;
+                let idVal = daftarProduk['id_produk'][j] || 'Kosong';
+                let namaVal = daftarProduk['nama'][j] || 'Nama kosong';
+                let hargaAngka = daftarProduk['harga'][j] || 0;
+                let hargaVal = Number(hargaAngka).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+                let descVal = daftarProduk['deskripsi'][j] || 'Deskripsi kosong';
+                let imgVal = daftarProduk['gambar'][j] || 'https://placehold.co/100';
+
+                // Membangun struktur baris menggunakan komponen div
+                htmlRows += `
+                    <div class="div-table-row">
+                        <div><span class="fw-bold text-primary">#${idVal}</span></div>
+                        <div><span class="fw-semibold text-dark">${namaVal}</span></div>
+                        <div><span class="text-success fw-bold">${hargaVal}</span></div>
+                        <div><span class="text-muted small">${descVal}</span></div>
+                        <div><img src="${imgVal}" alt="Produk" class="product-img" onerror="this.src='https://placehold.co/100?text=Error'"></div>
+                        <div><span class="badge bg-secondary bg-opacity-10 text-secondary px-3 py-2 rounded-pill">${katVal}</span></div>
+                    </div>
+                `;
+            }
+
+            // Jika data kosong setelah difilter
+            if (!adaData) {
+                htmlRows = `<div class="text-center py-4 text-muted bg-white rounded-3 shadow-sm">Tidak ada produk dalam kategori ini.</div>`;
+            }
+
+            // Masukkan hasil iterasi ke dalam elemen kontainer tabel div
+            document.getElementById('div-table-body').innerHTML = htmlRows;
+        }
+
+        // Fungsi saat tombol filter diklik
+        function filterProduk(kategori, element) {
+            // Ubah status aktif tombol (styling Bootstrap)
+            let buttons = document.querySelectorAll('#filter-container button');
+            buttons.forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline-primary');
+            });
+            element.classList.remove('btn-outline-primary');
+            element.classList.add('btn-primary');
+
+            // Render ulang tabel berdasarkan kategori yang dipilih
+            renderTabel(kategori);
+        }
+
+        // Panggil render pertama kali untuk menampilkan semua data saat halaman dimuat
+        renderTabel('Semua');
+
+        console.log("Semua data produk berhasil dimasukkan:", daftarProduk);
+    </script>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
