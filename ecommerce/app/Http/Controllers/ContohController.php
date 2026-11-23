@@ -15,4 +15,16 @@ class ContohController extends Controller
         //atau bisa disingkat seperti ini 
         return view('contoh',compact('title','products'));
     }
+
+    public function coba(){
+
+        $title = 'ini adalah halaman title coba';
+        $header = 'ini adalah header coba';
+        $conten = 'ini adalah conten coba';
+        $ifLogin = false;
+        $products =['Laptop','Keyboard','Mouse','Monitor'];
+        return view('coba',compact('title','header','conten','ifLogin','products'));
+    }
+
+    
 }
